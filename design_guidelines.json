@@ -1,0 +1,119 @@
+{
+  "project_name": "FOCUS SAFE",
+  "theme": "light",
+  "archetype": "1 (Organic & Earthy - Premium Tech variant)",
+  "emotional_tone": "Reassuring, calm, premium, technological but warm. Zero conflict.",
+  "typography": {
+    "headings": {
+      "family": "Outfit, sans-serif",
+      "weight_strategy": "Radical contrast. Use font-light (300) for elegant oversized headers, and font-semibold (600) for structured subheadings.",
+      "letter_spacing": "tracking-tight for large headings (H1/H2)",
+      "usage": "H1: text-5xl sm:text-6xl, H2: text-3xl sm:text-4xl, H3: text-xl sm:text-2xl"
+    },
+    "body": {
+      "family": "Manrope, sans-serif",
+      "weight_strategy": "font-normal (400) for body, font-medium (500) for UI elements",
+      "line_height": "leading-relaxed for paragraphs"
+    },
+    "labels": {
+      "style": "uppercase, tracking-[0.2em], text-xs, font-bold"
+    }
+  },
+  "colors": {
+    "background": "#FAF9F6",
+    "surface": "#FFFFFF",
+    "primary": "#1A3636",
+    "primary_foreground": "#FFFFFF",
+    "secondary": "#E8EBE9",
+    "secondary_foreground": "#1A3636",
+    "accent": "#E07A5F",
+    "accent_foreground": "#FFFFFF",
+    "muted": "#F0F0EA",
+    "muted_foreground": "#6B7270",
+    "border": "#E2E4E1",
+    "success": "#2D6A4F",
+    "warning": "#F4A261",
+    "destructive": "#E63946",
+    "notes": "The palette is designed to feel like an expensive piece of furniture or wellness device, not a sterile tech gadget. Primary is a deep pine green, acting as the anchor. Accent is a warm terracotta for alerts/CTAs to break the calm only when necessary."
+  },
+  "layout_and_spacing": {
+    "spacing_scale": "Generous. Use p-8, p-12, py-24 for sections. Components should breathe.",
+    "border_radius": "Concentric and soft. Outer bento cards: rounded-3xl. Inner elements: rounded-xl or rounded-2xl.",
+    "grids": {
+      "marketing": "Mode A: Tetris Grid. Asymmetric, with large overlapping images and generous negative space.",
+      "dashboard": "Mode B: Control Room Grid. 3 or 4 columns. Dense but clean. Gap-6."
+    },
+    "surfaces": {
+      "marketing_header": "Glassmorphism: bg-white/70 backdrop-blur-xl border-b border-white/40",
+      "dashboard_cards": "Solid background (#FFFFFF) with 1px border (#E2E4E1), no default shadow. Hover: shadow-lg and -translate-y-1."
+    }
+  },
+  "components_strategy": {
+    "marketing": "Custom HTML/Tailwind. Use framer-motion for smooth scroll reveals. Avoid Shadcn for large marketing sections to maintain a creative layout.",
+    "dashboard": "Shadcn UI heavily customized. Specifically use Card, Switch (for rules), Slider, Dialog (rule creation), Avatar, Select, Tabs.",
+    "icons": "@phosphor-icons/react (Duotone variant) for a premium, dual-tone tech feel.",
+    "animations": "Subtle and organic. Elements should fade and slide up gently. Use react-spring or framer-motion. Dashboard micro-interactions should be snappy but smooth."
+  },
+  "pages": {
+    "landing": {
+      "sections": [
+        "Hero: Overlapping layout. Large Outfit typography on the left. Right side features 'hero_safe_lifestyle' image. CTA: 'Installer le Safe' (Primary), 'Voir comment ça marche' (Secondary text/link).",
+        "How it works: 3 distinct numbered steps. Bento style cards. 1. Placer le téléphone, 2. Verrouillage auto, 3. Temps en famille.",
+        "Product Details: Show 'product_macro' image with floating glassmorphism UI pills indicating 'Batterie 98%', 'Verrouillé', 'Règle: Nuit'.",
+        "Trust/Difference: Why it's not 'Big Brother'. Emphasize physical rules over digital spying. Use 'family_lifestyle' image.",
+        "Pricing: 2-column bento. Base safe (99-199€) vs Premium Sub (4.99€/mo).",
+        "Footer: Large typography, dark background (Primary color #1A3636) with light text for contrast shift."
+      ]
+    },
+    "app_auth": {
+      "layout": "Split screen. Left: Authentication form (Email/Password or Google). Right: 'abstract_bg' image with a reassuring quote about family time."
+    },
+    "dashboard": {
+      "layout": "Sidebar navigation (Desktop) / Bottom bar (Mobile). Top area shows household status.",
+      "sections": [
+        "Safe Status Card: Real-time presence of phone, battery ring chart, lock status toggle. Highlight with subtle glowing border if locked.",
+        "Quick Actions: Row of buttons (Créer règle, Mode focus maintenant, Déverrouiller code parent).",
+        "Rules (Règles): List of active rules with Shadcn Switches. Click to edit days/hours in a Dialog.",
+        "History Timeline: Vertical timeline showing events (Placé, Verrouillé, Tentative, Déverrouillé).",
+        "Alerts: Notification center. Use Accent color for absence/unauthorized open, Warning for low battery.",
+        "Settings: Master code, WiFi, Vacation mode toggle."
+      ]
+    }
+  },
+  "media": {
+    "images": {
+      "hero_safe_lifestyle": {
+        "url": "https://static.prod-images.emergentagent.com/jobs/5ef8b386-d27c-482b-b637-1658367b4480/images/fd44bc4628a280494b1fa44dc8effa8c55cb7a4f97dff87d95f520a3e74cbf69.png",
+        "description": "Wide lifestyle shot of the smart safe in a living room, family in background.",
+        "usage": "Landing page hero section"
+      },
+      "product_macro": {
+        "url": "https://static.prod-images.emergentagent.com/jobs/5ef8b386-d27c-482b-b637-1658367b4480/images/ad122b937a475278cc066db66a582eac5a0d2f461bee1a3461fda0a68ab9a01b.png",
+        "description": "Close-up macro photography of the minimalist smart safe.",
+        "usage": "Product feature section on landing page"
+      },
+      "abstract_bg": {
+        "url": "https://static.prod-images.emergentagent.com/jobs/5ef8b386-d27c-482b-b637-1658367b4480/images/18c61c7eab864618fd54a6516ddfbfbcc54cfa2e7c5ee44e88e3730331cc68e9.png",
+        "description": "Abstract calm gradient background with organic flowing shapes.",
+        "usage": "Auth page background or decorative sections"
+      },
+      "family_lifestyle": {
+        "url": "https://images.unsplash.com/photo-1770587899537-23e617e17767?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTJ8MHwxfHNlYXJjaHwyfHxjYWxtJTIwZmFtaWx5JTIwbGl2aW5nJTIwcm9vbSUyMHdhcm0lMjBsaWdodHxlbnwwfHx8fDE3NzgxNDI2OTB8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Woman relaxing on couch with child nearby.",
+        "usage": "Trust/Difference section on landing page"
+      },
+      "testimonial_family": {
+        "url": "https://images.unsplash.com/photo-1758687126877-b37052a20a4d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHwyfHxtb2Rlcm4lMjBmYW1pbHklMjBjYW5kaWQlMjBzbWlsaW5nJTIwYXQlMjBob21lfGVufDB8fHx8MTc3ODE0MjcwNnww&ixlib=rb-4.1.0&q=85",
+        "description": "A happy family of three sitting on a couch.",
+        "usage": "Social proof or Parents profiles in dashboard"
+      }
+    }
+  },
+  "testing_requirements": {
+    "data_testid_convention": "All interactive elements MUST use data-testid with kebab-case role-based names (e.g., data-testid=\"create-rule-button\", data-testid=\"safe-status-toggle\")."
+  },
+  "installation_instructions": {
+    "dependencies": "yarn add @phosphor-icons/react framer-motion clsx tailwind-merge",
+    "notes": "Ensure fonts Outfit and Manrope are imported in the main CSS or via Google Fonts."
+  }
+}
