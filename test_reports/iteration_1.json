@@ -1,0 +1,46 @@
+{
+  "summary": "Full backend + frontend regression on FOCUS SAFE MVP. Backend pytest suite (25 tests) is 100% green covering health/contact, auth signup/login/me/logout, safes CRUD + status + events + auto-alerts, rules full lifecycle (create/list/update/toggle/delete), profiles CRUD, alerts list/read/mark-all, settings GET+PUT persistence, dashboard summary, and family-code scoping isolation. Frontend smoke + nav: landing renders, login w/ demo.parent@example.com works and redirects to /dashboard with toast 'Connecté', all six sidebar routes (/dashboard, /rules, /history, /profiles, /alerts, /settings) navigate without errors and have data-testid (nav-overview, nav-rules, nav-history, nav-profiles, nav-alerts, nav-settings, family-code, user-name, logout-button). 'Ajouter un safe' dialog opens with data-testid='safe-name-input' and the three expected fields. Profiles and rules pages show correct French empty states.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {
+        "screen": "Login page",
+        "issues": ["Both 'Continuer avec Google' and 'Se connecter' buttons render as <button type=submit> — minor testability concern (selector by type='submit' picks the first one). Adding data-testid='login-submit' on the email/password submit button would improve testability."]
+      }
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "(Optional/nice-to-have) Add data-testid attributes on the login/signup submit buttons, the 'Ajouter un safe' / 'Ajouter un profil' / 'Ajouter une règle' buttons, and on the safe-create dialog Submit button — the rest of the nav and form fields already have data-testid which is great.",
+    "(Optional) Add a data-testid='contact-form' anchor on the landing contact section to help future automated tests target it."
+  ],
+  "critical_code_review_comments": [
+    "server.py is a single 730-line file mixing models + routes + helpers. Consider splitting into routers/ and models/ modules for maintainability before adding more features.",
+    "google_session uses synchronous requests.get inside an async route (blocks event loop). Switch to httpx.AsyncClient for the OAuth lookup.",
+    "/api/safes/{id}/status and /events accept hardware updates but currently still require a logged-in family user (Depends(get_current_user)). For real hardware push you'll need a separate device-token auth scheme, otherwise the 'hardware-ready' contract is only manual override.",
+    "Email send uses asyncio.create_task without storing the reference — fire-and-forget is fine for MVP but failures are silent; consider a small retry/log queue.",
+    "verify_password loads bcrypt but JWT_SECRET defaults to 'change_me' if env var missing — server.py fixes the env at /app/backend/.env, OK.",
+    "create_alert duplicates the email opt-in check vs email_alerts setting — that logic is correct (settings_doc.email_alerts gate), good."
+  ],
+  "updated_files": [
+    "/app/backend/tests/backend_test.py (created)"
+  ],
+  "success_rate": {
+    "backend": "100% (25/25)",
+    "frontend": "100% on smoke flows tested (login, nav across 6 routes, dialogs render with proper inputs)"
+  },
+  "test_credentials": "demo.parent@example.com / password123 (works). Tests also create disposable TEST_<uuid>@example.com users via /api/auth/signup.",
+  "seed_data_creation": "Backend tests create disposable users prefixed TEST_ and a few safes/rules/profiles/alerts for the test family. Two distinct families are created to verify family-code scoping. No production data modified.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "All endpoints are scoped by family_code via Depends(get_current_user). Use Authorization: Bearer <jwt> from /api/auth/signup or /api/auth/login. The tests in /app/backend/tests/backend_test.py are pytest-classed and can be re-run as regression with `pytest /app/backend/tests/backend_test.py -v`. Frontend localStorage key for the JWT is 'focus_safe_token'. Login page has TWO buttons of type=submit (Google + Se connecter) — always select 'Se connecter' by exact text.",
+  "rca_of_the_issue": "N/A — no functional bugs observed. Backend returns expected status codes and persists all data correctly (verified with create→GET pattern in tests). Frontend authenticates, persists JWT, and routes to the dashboard with the expected post-login toast."
+}
